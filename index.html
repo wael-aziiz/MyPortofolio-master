@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معرض أعمالي | Wael Aziz</title>
     <style>
+        /* إعدادات عامة */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -12,78 +13,121 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
             color: #333;
             line-height: 1.6;
-            padding: 20px;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            padding: 20px;
         }
+        /* شريط التنقل */
+        nav {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #3498db;
+        }
+        /* قسم العنوان مع البروفايل */
         header {
             background: linear-gradient(135deg, #2c3e50, #3498db);
             color: white;
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
             border-radius: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
         header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.9;
         }
+        /* البطاقات والأقسام */
         .card {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .card h2 {
             color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
         }
+        /* المهارات */
         .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
         .skill-tag {
             background: #eef2f5;
             color: #34495e;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
             font-weight: bold;
         }
+        /* المشاريع */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
         .project-item {
             border: 1px solid #eee;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
             background: #fafafa;
+            transition: transform 0.3s;
+        }
+        .project-item:hover {
+            transform: translateY(-5px);
         }
         .project-item h3 {
             color: #2980b9;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
         }
+        /* الحقوق */
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             color: #7f8c8d;
             font-size: 0.9rem;
         }
@@ -92,20 +136,32 @@
 <body>
 
     <div class="container">
+        <!-- شريط التنقل العلوي -->
+        <nav>
+            <div>Wael Aziz</div>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#about">نبذة</a></li>
+                <li><a href="#skills">المهارات</a></li>
+                <li><a href="#projects">الأعمال</a></li>
+            }
+        </nav>
+
         <!-- قسم الهيدر والتعريف -->
-        <header>
+        <header id="home">
+            <img src="https://via.placeholder.com/120" alt="صورة البروفايل" class="profile-pic">
             <h1>مرحباً بك في معرض أعمالي البرمجية</h1>
             <p>مطور ويب ومتخصص في إيجاد الحلول البرمجية الذكية</p>
         </header>
 
         <!-- قسم نبذة عني -->
-        <div class="card">
+        <div class="card" id="about">
             <h2>نبذة عني</h2>
             <p>أعمل على تطوير وتصميم المواقع الإلكترونية مع التركيز على كتابة كود نظيف، آمن، ومريح للمستخدم. أهتم بتحويل الأفكار إلى تطبيقات ويب فعلية تعمل بكفاءة عالية.</p>
         </div>
 
         <!-- قسم المهارات -->
-        <div class="card">
+        <div class="card" id="skills">
             <h2>المهارات التقنية</h2>
             <div class="skills">
                 <span class="skill-tag">HTML5 / CSS3</span>
@@ -114,11 +170,12 @@
                 <span class="skill-tag">Python</span>
                 <span class="skill-tag">SQL Databases</span>
                 <span class="skill-tag">Git & GitHub</span>
+                <span class="skill-tag">Linux</span>
             </div>
         </div>
 
         <!-- قسم النماذج والمشاريع -->
-        <div class="card">
+        <div class="card" id="projects">
             <h2>نماذج الأعمال</h2>
             <div class="projects-grid">
                 <div class="project-item">
@@ -128,6 +185,10 @@
                 <div class="project-item">
                     <h3>إدارة وقواعد البيانات</h3>
                     <p>تنظيم البيانات وبناء أنظمة وتطبيقات لإدارة المحتوى والأعمال.</p>
+                </div>
+                <div class="project-item">
+                    <h3>تطوير الأنظمة الخلفية</h3>
+                    <p>بناء المنطق البرمجي والـ API اللازم لتشغيل تطبيقات الويب.</p>
                 </div>
             </div>
         </div>
