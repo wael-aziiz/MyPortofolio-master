@@ -12,6 +12,9 @@
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background-color: #f0f2f5;
             color: #333;
@@ -21,59 +24,141 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
+            padding-top: 70px; /* مسافة لحماية المحتوى من الهيدر الثابت */
         }
-        /* شريط التنقل */
-        nav {
+
+        /* شريط علوي ثابت يحتوي على القائمة الجانبية */
+        .top-navbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 60px;
             background-color: #2c3e50;
             color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* القائمة الجانبية (Sidebar) */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -260px; /* مخفية خارج الشاشة جهة اليمين */
+            width: 250px;
+            height: 100%;
+            background-color: #1a252f;
+            z-index: 1002;
+            transition: right 0.3s ease-in-out;
+            padding-top: 20px;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+        }
+
+        .sidebar.active {
+            right: 0; /* إظهار القائمة */
+        }
+
+        .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-        nav a {
-            text-decoration: none;
+            padding: 0 20px 20px 20px;
+            border-bottom: 1px solid #34495e;
             color: white;
-            font-weight: bold;
-            transition: color 0.3s;
         }
-        nav a:hover {
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #bdc3c7;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 15px 25px;
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background 0.2s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #34495e;
             color: #3498db;
         }
-        /* قسم العنوان مع البروفايل */
+
+        /* طبقة التعتيم الخلفية عند فتح القائمة */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* قسم الهيدر والتعريف */
         header {
             background: linear-gradient(135deg, #2c3e50, #3498db);
             color: white;
-            padding: 60px 20px;
+            padding: 50px 20px;
             text-align: center;
             border-radius: 12px;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .profile-pic {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             border: 4px solid white;
             margin-bottom: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            background-color: #fff;
         }
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 10px;
         }
         header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.9;
         }
+
         /* البطاقات والأقسام */
         .card {
             background: white;
@@ -87,8 +172,9 @@
             border-bottom: 3px solid #3498db;
             padding-bottom: 10px;
             margin-bottom: 20px;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
         }
+
         /* المهارات */
         .skills {
             display: flex;
@@ -100,13 +186,14 @@
             color: #34495e;
             padding: 10px 20px;
             border-radius: 25px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
         }
+
         /* المشاريع */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
         .project-item {
@@ -114,20 +201,17 @@
             padding: 20px;
             border-radius: 10px;
             background: #fafafa;
-            transition: transform 0.3s;
-        }
-        .project-item:hover {
-            transform: translateY(-5px);
         }
         .project-item h3 {
             color: #2980b9;
             margin-bottom: 10px;
             font-size: 1.2rem;
         }
+
         /* الحقوق */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             color: #7f8c8d;
             font-size: 0.9rem;
         }
@@ -135,21 +219,33 @@
 </head>
 <body>
 
-    <div class="container">
-        <!-- شريط التنقل العلوي -->
-        <nav>
-            <div>Wael Aziz</div>
-            <ul>
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#about">نبذة</a></li>
-                <li><a href="#skills">المهارات</a></li>
-                <li><a href="#projects">الأعمال</a></li>
-            }
-        </nav>
+    <!-- الشريط العلوي الثابت -->
+    <div class="top-navbar">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="brand-title">Wael Aziz</div>
+    </div>
 
+    <!-- القائمة الجانبية -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>القائمة</span>
+            <button class="close-btn" onclick="toggleMenu()">✕</button>
+        </div>
+        <ul>
+            <li><a href="#home" onclick="toggleMenu()">الرئيسية</a></li>
+            <li><a href="#about" onclick="toggleMenu()">نبذة عني</a></li>
+            <li><a href="#skills" onclick="toggleMenu()">المهارات</a></li>
+            <li><a href="#projects" onclick="toggleMenu()">الأعمال</a></li>
+        </ul>
+    </div>
+
+    <!-- الخلفية المعتمة -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <div class="container">
         <!-- قسم الهيدر والتعريف -->
         <header id="home">
-            <img src="https://via.placeholder.com/120" alt="صورة البروفايل" class="profile-pic">
+            <img src="https://via.placeholder.com/110" alt="صورة البروفايل" class="profile-pic">
             <h1>مرحباً بك في معرض أعمالي البرمجية</h1>
             <p>مطور ويب ومتخصص في إيجاد الحلول البرمجية الذكية</p>
         </header>
@@ -198,6 +294,16 @@
             <p>جميع الحقوق محفوظة &copy; 2026 | تم التطوير والاستضافة بواسطة GitHub Pages</p>
         </footer>
     </div>
+
+    <!-- برمجة فتح وإغلاق القائمة -->
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    </script>
 
 </body>
 </html>
